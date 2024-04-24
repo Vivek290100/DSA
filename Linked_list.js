@@ -27,7 +27,7 @@ class LinkedList{
             if(this.isEmpty()){
                 this.Head = node
             }else{
-                node.next = this.Head
+                node.next = this.Head            //30,20,10
                 this.Head = node
             }
             this.size++
@@ -39,7 +39,7 @@ class LinkedList{
         if (this.isEmpty()) {
             this.Head = node
         }else{
-            let prev = this.Head
+            let prev = this.Head                //10,20,30
             while (prev.next) {
                 prev = prev.next
             }
@@ -49,7 +49,7 @@ class LinkedList{
     }
 
 
-     //insert
+     //insert, index
      insert(value, index){
         if (index < 0 || index > this.size) {
             return
@@ -59,14 +59,23 @@ class LinkedList{
         }else{
             const node = new Node(value)
             let prev = this.Head
-            for (let i = 0; i < index-1; i++) {
-                 prev = prev.next
+            for (let i = 0; i < index-1; i++) {  //List.insert(50,2)
+                 prev = prev.next                //10,20,50,30
             }
             node.next = prev.next
             prev.next = node
             this.size++
         }
      }
+
+
+     remove(index){
+        if(index < 0 || index >= this.size){
+            return null
+        }
+     }
+
+
 
 
     print(){
