@@ -10,4 +10,7 @@ class LinkedList{
     constructor(){
         this.head = null
     }
+
 }
+
+List = new LinkedList

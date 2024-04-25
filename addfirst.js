@@ -9,12 +9,14 @@ class Node{
 class LinkedList{
     constructor(){
         this.head = null
+        this.size = 0
     }
 
     addFirst(value){
         const newNode = new Node(value)
         newNode.next = this.head
         this.head = newNode
+        this.size++
     }
 }
 
