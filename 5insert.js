@@ -4,38 +4,42 @@ class Node{
         this.next = null
     }
 }
-
-
 class LinkedList{
     constructor(){
         this.head = null;
-        this.size = 0
+        this.size = 0;
     }
-
     isEmpty(){
-        return this.size == 0
+        return this.size === 0
     }
-
-    addLast(value){
+    add(value){
         const newNode = new Node(value)
         if(this.isEmpty()){
             this.head = newNode
         }else{
             let current = this.head;
-            while(current.next){
+            while (current.next) {
                 current = current.next
             }
             current.next = newNode
         }
         this.size++
     }
-
-    
+    print(){
+        if(this.isEmpty()){
+            console.log('its empty');
+        }else{
+            let current = this.head;
+            while(current){
+                console.log(current.value);
+                current = current.next
+            }
+        }
+    }
 }
-
-List = new LinkedList
-
-List.addLast(30)
-List.addLast(20)
-List.addLast(10)
+const List = new LinkedList()
+List.add(23);
+List.add(3);
+List.add(2);
 List.print()
+

@@ -1,4 +1,4 @@
-//================sum of n numbers====================
+// ================sum of n numbers====================
 
 // function sum(n) {
 //   let result = 0;
@@ -19,7 +19,7 @@
 //   }
 //   return n + sum(n - 1);
 // }
-// console.log(sum(5));
+// console.log(sum(5));// Outputs: 15
 
 
 
@@ -86,17 +86,17 @@
 
 
 
-// function fact(n) {
-//   if (n <= 1) {
-//     return 1;
-//   } else {
-//     return n * fact(n - 1);
-//   }
-// }
+function fact(n) {
+  if (n <= 1) {
+    return 1;
+  } else {
+    return n * fact(n - 1);
+  }
+}
 
-// console.log(fact(0)); // Outputs: 1
-// console.log(fact(1)); // Outputs: 1
-// console.log(fact(5)); // Outputs: 120
+console.log(fact(0)); // Outputs: 1
+console.log(fact(1)); // Outputs: 1
+console.log(fact(5)); // Outputs: 120
 
 
 
