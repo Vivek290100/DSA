@@ -26,6 +26,11 @@ class queue{
     }
 }
 
+
+class Satck{
+   
+}
+
 let Queue = new queue()
 
 Queue.enqueue(10)

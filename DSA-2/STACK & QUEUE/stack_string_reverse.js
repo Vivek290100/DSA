@@ -4,7 +4,7 @@ class Stack{
     }
 
     isEmpty(){
-        this.items == 0;
+        return this.items == 0;
     }
 
     push(element){
