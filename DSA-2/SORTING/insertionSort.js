@@ -18,12 +18,3 @@ function insertionSort(arr){
 console.log(insertionSort([4,5,3,4,8,6,8,2]));
 
 
-function insertion(arr){
-    for (i=0;i<arr.length;i++){
-        for(j=i;j>=0;j--){
-            if(arr[j]<arr[j-1]){
-                [arr[j], arr[j-1]]
-            }
-        }
-    }
-}
