@@ -5,7 +5,6 @@ class Node{
         this.right = null
     }
 }
-
 class BinarySarrchTree{
     constructor(){
         this.root = null
@@ -14,7 +13,6 @@ class BinarySarrchTree{
     isEmpty(){
         return this.root === null
     }
-
     insert(value){
         const newNode = new Node(value)
         if(!this.root){
@@ -23,7 +21,6 @@ class BinarySarrchTree{
             this.insertNode(this.root, newNode)
         }
     }
-
     insertNode(root, newNode){
         if(newNode.value < root.value){
             if(root.left === null){
@@ -39,7 +36,6 @@ class BinarySarrchTree{
             }
         }
     }
-
     min(root = this.root){
         if(!root.left){
             return root.value
@@ -47,7 +43,6 @@ class BinarySarrchTree{
             return this.min(root.left)
         }
     }
-
     max(root = this.root){
         if(!root.right){
             return root.value
@@ -55,17 +50,11 @@ class BinarySarrchTree{
             return this.max(root.right)
         }
     }
-
-
 }
-
 const bst = new BinarySarrchTree()
-
 bst.insert(10)
 bst.insert(30)
 bst.insert(20)
 bst.insert(40)
-
-
 console.log(bst.min());
 console.log(bst.max());

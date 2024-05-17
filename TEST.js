@@ -1,63 +1,83 @@
-//stack using queue
-class Stack {
-    constructor() {
-        this.queue1 = [];
-        this.queue2 = [];
-    }
+class MaxHeap {
+  constructor() {
+      this.heap = [];
+  }
 
-    push(value) {
-        // Add the new element to queue1
-        this.queue1.push(value);
-    }
+  getLeftChildIndex(index) {
+      return 2 * index + 1;
+  }
 
-    pop() {
-        // Move all elements except the last one from queue1 to queue2
-        while (this.queue1.length > 1) {
-            this.queue2.push(this.queue1.shift());
-        }
-        
-        // Pop and return the last element from queue1
-        const popped = this.queue1.shift();
+  getRightChildIndex(index) {
+      return 2 * index + 2;
+  }
 
-        // Swap queue1 and queue2
-        const temp = this.queue1;
-        this.queue1 = this.queue2;
-        this.queue2 = temp;
+  insert(value) {
+      this.heap.push(value);
+      this.heapifyUp();
+  }
 
-        return popped;
-    }
+  delete() {
+      if (this.isEmpty()) return null;
+      if (this.heap.length === 1) return this.heap.pop();
+      const deletedValue = this.heap[0];
+      this.heap[0] = this.heap.pop();
+      this.heapifyDown();
+      return deletedValue;
+  }
 
-    peek() {
-        // Move all elements from queue1 to queue2
-        while (this.queue1.length > 1) {
-            this.queue2.push(this.queue1.shift());
-        }
+  peek() {
+      return this.isEmpty() ? null : this.heap[0];
+  }
 
-        // Get the last element from queue1
-        const peeked = this.queue1[0];
+  isEmpty() {
+      return this.heap.length === 0;
+  }
 
-        // Move the element back to queue1
-        this.queue2.push(this.queue1.shift());
+  heapifyUp() {
+      let currentIndex = this.heap.length - 1;
+      while (currentIndex > 0) {
+          const parentIndex = Math.floor((currentIndex - 1) / 2);
+          if (this.heap[currentIndex] > this.heap[parentIndex]) {
+              [this.heap[currentIndex], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[currentIndex]];
+              currentIndex = parentIndex;
+          } else {
+              break;
+          }
+      }
+  }
 
-        // Swap queue1 and queue2
-        const temp = this.queue1;
-        this.queue1 = this.queue2;
-        this.queue2 = temp;
-
-        return peeked;
-    }
-
-    isEmpty() {
-        return this.queue1.length === 0;
-    }
+  heapifyDown() {
+      let index = 0;
+      while (this.getLeftChildIndex(index) < this.heap.length) {
+          let largerChildIndex = this.getLeftChildIndex(index);
+          const rightChildIndex = this.getRightChildIndex(index);
+  
+          if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] > this.heap[largerChildIndex]) {
+              largerChildIndex = rightChildIndex;
+          }
+  
+          if (this.heap[index] >= this.heap[largerChildIndex]) {
+              break;
+          }
+  
+          [this.heap[index], this.heap[largerChildIndex]] = [this.heap[largerChildIndex], this.heap[index]];
+          index = largerChildIndex;
+      }
+  }
 }
 
-// Example usage:
-const stack = new Stack();
-stack.push(1);
-stack.push(2);
-stack.push(3);
-console.log(stack.peek()); // Output: 3
-console.log(stack.pop()); // Output: 3
-console.log(stack.pop()); // Output: 2
-console.log(stack.isEmpty()); // Output: false
+function heapSort(array) {
+  const maxHeap = new MaxHeap();
+  for (const value of array) {
+      maxHeap.insert(value);
+  }
+
+  for (let i = array.length - 1; i >= 0; i--) {
+      array[i] = maxHeap.delete();
+  }
+
+  return array;
+}
+
+const array = [10, 5, 17, 4, 22];
+console.log(heapSort(array)); // Output: [4, 5, 10, 17, 22]

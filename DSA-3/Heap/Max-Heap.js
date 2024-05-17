@@ -66,7 +66,6 @@ class MaxHeap {
     }
   }
   
-  // Example usage:
   const maxHeap = new MaxHeap();
   maxHeap.insert(10);
   maxHeap.insert(5);
@@ -74,7 +73,6 @@ class MaxHeap {
   maxHeap.insert(4);
   maxHeap.insert(22);
   
-  console.log(maxHeap.peek()); // Output: 22
-  console.log(maxHeap.delete()); // Output: 22
-  console.log(maxHeap.peek()); // Output: 17
-  
+  console.log(maxHeap.peek()); //  22
+  console.log(maxHeap.delete()); //22
+  console.log(maxHeap.peek()); //  17

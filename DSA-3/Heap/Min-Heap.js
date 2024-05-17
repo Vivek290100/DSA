@@ -1,15 +1,15 @@
-class MaxHeap {
+class MinHeap {
     constructor() {
       this.heap = [];
     }
-  
+
     getLeftChildIndex(index) {
-      return 2 * index + 1;
-    }
-  
-    getRightChildIndex(index) {
-      return 2 * index + 2;
-    }
+        return 2 * index + 1;
+      }
+    
+      getRightChildIndex(index) {
+        return 2 * index + 2;
+      }
   
     insert(value) {
       this.heap.push(value);
@@ -37,7 +37,7 @@ class MaxHeap {
       let currentIndex = this.heap.length - 1;
       while (currentIndex > 0) {
         const parentIndex = Math.floor((currentIndex - 1) / 2);
-        if (this.heap[currentIndex] > this.heap[parentIndex]) {
+        if (this.heap[currentIndex] < this.heap[parentIndex]) {
           [this.heap[currentIndex], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[currentIndex]];
           currentIndex = parentIndex;
         } else {
@@ -49,32 +49,30 @@ class MaxHeap {
     heapifyDown() {
       let index = 0;
       while (this.getLeftChildIndex(index) < this.heap.length) {
-        let largerChildIndex = this.getLeftChildIndex(index);
+        let smallerChildIndex = this.getLeftChildIndex(index);
         const rightChildIndex = this.getRightChildIndex(index);
   
-        if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] > this.heap[largerChildIndex]) {
-          largerChildIndex = rightChildIndex;
+        if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] < this.heap[smallerChildIndex]) {
+          smallerChildIndex = rightChildIndex;
         }
   
-        if (this.heap[index] >= this.heap[largerChildIndex]) {
+        if (this.heap[index] <= this.heap[smallerChildIndex]) {
           break;
         }
   
-        [this.heap[index], this.heap[largerChildIndex]] = [this.heap[largerChildIndex], this.heap[index]];
-        index = largerChildIndex;
+        [this.heap[index], this.heap[smallerChildIndex]] = [this.heap[smallerChildIndex], this.heap[index]];
+        index = smallerChildIndex;
       }
     }
   }
   
-  // Example usage:
-  const maxHeap = new MaxHeap();
-  maxHeap.insert(10);
-  maxHeap.insert(5);
-  maxHeap.insert(17);
-  maxHeap.insert(4);
-  maxHeap.insert(22);
+  const heap = new MinHeap();
+  heap.insert(10);
+  heap.insert(5);
+  heap.insert(17);
+  heap.insert(4);
+  heap.insert(22);
   
-  console.log(maxHeap.peek()); // Output: 22
-  console.log(maxHeap.delete()); // Output: 22
-  console.log(maxHeap.peek()); // Output: 17
-  
+  console.log(heap.peek()); //  4
+  console.log(heap.delete()); //4
+  console.log(heap.peek()); //  5
