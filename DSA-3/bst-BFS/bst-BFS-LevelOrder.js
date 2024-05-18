@@ -41,16 +41,16 @@ class BinarySarrchTree{
     }
 
     levelOrder(){
-        const queue = []
-        queue.push(this.root)
-        while(queue.length){
-            let curr = queue.shift()
+        const arr = []
+        arr.push(this.root)
+        while(arr.length){
+            let curr = arr.shift()
             console.log(curr.value);
             if(curr.left){
-                queue.push(curr.left)
+                arr.push(curr.left)
             }
             if(curr.right){
-                queue.push(curr.right)
+                arr.push(curr.right)
             }
         }
     }
