@@ -131,4 +131,4 @@ trie.insert('twenty')
 
 console.log(trie.search('on'));
 console.log(trie.startwith('o'));
-console.log(trie.autocomplete('o'));
+console.log(trie.autocomplete('o    '));

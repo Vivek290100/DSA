@@ -38,7 +38,7 @@ class binarySarrchTree{
                 this.insertNode(root.right, newNode)
             }
         }
-    }
+    }           
 
     search(root, value){
         if(!root){
@@ -46,7 +46,7 @@ class binarySarrchTree{
         }else{
             if(this.root.value === value){
                 return true
-            }else if(this.root.value > value){
+            }else if(root.value > value){
                 return this.search(root.left, value)
             }else{
                 return this.search(root.right, value)

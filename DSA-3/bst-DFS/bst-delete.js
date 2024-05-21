@@ -54,11 +54,11 @@ class BinarySearchTree {
         } else if (value > root.value) {
             root.right = this.deleteNode(root.right, value);
         } else {
-            // Case 1: No children (leaf node)
+            //  No children
             if (root.left === null && root.right === null) {
                 return null;
             }
-            // Case 2: One child
+            //  One child
             if (root.left === null) {
                 return root.right;
             } else if (root.right === null) {
