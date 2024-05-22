@@ -1,134 +1,91 @@
-// class Node{
-//     constructor(){
-//         this.children = {}
-//         this.endWord = false
-//     }
-// }
+    class Graph {
+        constructor() {
+            this.adjacencyList = {};
+        }
 
-// class trie{
-//     constructor(){
-//         this.root = new Node()
-//     }
-
-//     insert(word){
-//         if(!this.root){
-//             let currentNode = this.root
-//         }
-//         for(const char of word){
-//             if(!currentNode.children[char])
-//                 currentNode = currentNode.children[char]
-//             }
-//         this.currentNode = currentNode.children[char]
-//         currentNode.endWord = true
-//     }
-
-//     autoComplete(node, value){
-//         if(!this.root){
-//             let currentNode = this.root
-//         }
-//         for(const char of words){
-//             if(!this.currentNode.children[char]){
-//                 return empty
-//             }
-
-//             let list = []
-//             return this.colletWord(this.currentNode.children[char], word+char, node)
-//         }
-//     }
-
-//     colletWord(node, word, root){
-//         if(!this.root){
-//             list.push(word)
-//         }
-
-//         for(let char in node.children[char]){
-//             return this.colletWord(word, node.children[char])
-//         }
-//     }
-// }
-
-
-
-
-
-
-
-class Node{
-    constructor(){
-        this.children = {}
-        this.endword = false
-    }
-}
-
-class Trie{
-    constructor(){
-        this.root = new Node()
-    }
-
-    insert(word){
-        let currentNode = this.root
-        for(const char of word){
-            if(!currentNode.children[char]){
-                currentNode.children[char] = new Node()
+        addVertex(vertex) {
+            if (!this.adjacencyList[vertex]) {
+                this.adjacencyList[vertex] = []
             }
-            currentNode = currentNode.children[char]
         }
-        currentNode.endword = true
-    }
 
-    search(word){
-        let currentNode = this.root
-        for(const char of word){
-            if(!currentNode.children[char]){
-                return false
+        addEdge(vertex1, vertex2) {
+            if (!this.adjacencyList[vertex1]) {
+                this.addVertex(vertex1);
             }
-            currentNode = currentNode.children[char]
-        }
-        return currentNode.endword
-    }
-
-    startwith(word){
-        let currentNode = this.root
-        for(const char of word){
-            if(!currentNode.children[char]){
-                return false            
+            if (!this.adjacencyList[vertex2]) {
+                this.addVertex(vertex2);
             }
-            currentNode = currentNode.children[char]
+            this.adjacencyList[vertex1].push(vertex2);
+            this.adjacencyList[vertex2].push(vertex1); 
         }
-        return true
-    }
 
-    autocomplete(word){
-        let currentNode = this.root
-        for(const char of word){
-            if(!currentNode.children[char]){
-                return []
+        displayGraph() {
+            for (let vertex in this.adjacencyList) {
+                console.log(`${vertex} -> ${this.adjacencyList[vertex].join(", ")}`);
             }
-            currentNode = currentNode.children[char]
         }
-        let list = []
-        this.collectwords(currentNode, word, list)
-        return list
+
+        bfs(start) {
+            const queue = [start];
+            const result = [];
+            const visited = {};
+            visited[start] = true;
+
+            while (queue.length) {
+                const vertex = queue.shift();
+                result.push(vertex);
+
+                this.adjacencyList[vertex].forEach(neighbor => {
+                    if (!visited[neighbor]) {
+                        visited[neighbor] = true;
+                        queue.push(neighbor);
+                    }
+                });
+            }
+
+            return result;
+        }
+
+        dfs(start) {
+            const result = [];
+            const visited = {};
+            const adjacencyList = this.adjacencyList;
+
+            (function dfsHelper(vertex) {
+                if (!vertex) return;
+                visited[vertex] = true;
+                result.push(vertex);
+
+                adjacencyList[vertex].forEach(neighbor => {
+                    if (!visited[neighbor]) {
+                        dfsHelper(neighbor);
+                    }
+                });
+            })(start);
+
+            return result;
+        }
     }
 
-    collectwords(node, word, list){
-        if(node.endword){
-            list.push(word)
-        }
-        for(let char in node.children){
-            this.collectwords(node.children[char], word+char, list)
-        }
-    }
+    // Example usage
+    const graph = new Graph();
+    graph.addVertex('A');
+    graph.addVertex('B');
+    graph.addVertex('C');
+    graph.addVertex('D');
+    graph.addVertex('E');
+    graph.addVertex('F');
 
-}
+    graph.addEdge('A', 'B');
+    graph.addEdge('A', 'C');
+    graph.addEdge('B', 'D');
+    graph.addEdge('C', 'E');
+    graph.addEdge('D', 'E');
+    graph.addEdge('D', 'F');
+    graph.addEdge('E', 'F');
 
-const trie = new Trie()
+    graph.displayGraph();
 
-trie.insert('one')
-trie.insert('two')
-trie.insert('once')
-trie.insert('twenty')
-
-console.log(trie.search('on'));
-console.log(trie.startwith('o'));
-console.log(trie.autocomplete('o    '));
+    console.log("BFS Traversal:", graph.bfs('A'));
+    console.log("DFS Traversal:", graph.dfs('A'));

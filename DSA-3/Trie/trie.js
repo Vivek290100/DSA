@@ -57,7 +57,7 @@ class Trie{
     }
 
     collectWord(node,word,list){
-        if(this.node.endWord){
+        if(node.endWord){
             list.push(word)
         }
         for(let char in node.children){
