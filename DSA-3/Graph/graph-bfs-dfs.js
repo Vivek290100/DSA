@@ -38,8 +38,8 @@ class Graph {
 
             this.adjacencyList[vertex].forEach(neighbor => {
                 if (!visited[neighbor]) {
-                    visited[neighbor] = true;
                     queue.push(neighbor);
+                    visited[neighbor] = true;
                 }
             });
         }
@@ -54,8 +54,8 @@ class Graph {
 
         (function dfsHelper(vertex) {
             if (!vertex) return;
-            visited[vertex] = true;
             result.push(vertex);
+            visited[vertex] = true;
 
             adjacencyList[vertex].forEach(neighbor => {
                 if (!visited[neighbor]) {
@@ -65,10 +65,10 @@ class Graph {
         })(start);
 
         return result;
-    }
+    }   
 }
 
-// Example usage
+
 const graph = new Graph();
 graph.addVertex('A');
 graph.addVertex('B');
