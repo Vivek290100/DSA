@@ -91,7 +91,7 @@ const bstree = new BinarySearchTree();
 
 bstree.insert(10);
 bstree.insert(20);
-bstree.insert(30);
+// bstree.insert(30);
 
 bstree.delete(20);
 
